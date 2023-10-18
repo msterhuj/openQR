@@ -21,9 +21,11 @@ from django.conf.urls.static import static
 
 from front.views import index as front_index
 from dashboard.urls import urlpatterns as dashboard_urls
+from qrcode.urls import urlpatterns as qrcode_urls
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", front_index, name="front_index"),
     path("dashboard/", include(dashboard_urls)),
+    path("", include(qrcode_urls)),
+    path("", front_index, name="front_index"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
