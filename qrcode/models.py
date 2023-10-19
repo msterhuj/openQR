@@ -5,6 +5,7 @@ import uuid as uuid_lib
 
 class QRCode(models.Model):
     uuid = models.UUIDField(unique=True, editable=False, default=uuid_lib.uuid4, db_index=True)
+    name = models.CharField(max_length=255)
     data = models.CharField(max_length=255)
     disabled = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
