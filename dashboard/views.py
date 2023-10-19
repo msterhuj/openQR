@@ -4,13 +4,18 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import authenticate, login
 
 from .auth_forms import LoginForm, RegisterForm
-
+from qrcode.models import QRCode
 
 def index_view(request):
     if not request.user.is_authenticated:
         return redirect("dashboard_login")
 
-    return render(request, "dashboard/index.html.j2")
+    context = {}
+
+    # get all qrcodes for users
+    context["qrcodes"] = QRCode.objects.filter(created_by=request.user)
+
+    return render(request, "dashboard/index.html", context)
 
 
 def login_view(request):

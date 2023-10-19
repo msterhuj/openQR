@@ -19,5 +19,5 @@ def fetch(request, qrcode_uuid):
     except QRCode.DoesNotExist:
         return HttpResponse(status=404)
     # check if the QRCode is active
-    if not qrcode.disabled:
+    if not qrcode.active:
         return HttpResponse(qrcode.data)
